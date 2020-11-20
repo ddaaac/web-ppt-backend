@@ -1,0 +1,4 @@
+PUT localhost:8080/slide/1
+Content-Type: text/plain
+
+zzz
