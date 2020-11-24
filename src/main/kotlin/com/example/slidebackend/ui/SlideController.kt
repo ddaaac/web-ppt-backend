@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.*
 import java.net.URI
 
 @RestController
-@RequestMapping("/slide")
+@RequestMapping("/ppt")
 class SlideController(private val slideService: SlideService) {
     @PostMapping
     fun save(@RequestBody markdown: String): ResponseEntity<Long> {
-        println(markdown)
         val id = slideService.create(markdown)
-        return ResponseEntity.created(URI.create("/slide/$id"))
+        return ResponseEntity.created(URI.create("/ppt/$id"))
                 .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Location")
                 .build()
     }
@@ -22,7 +21,7 @@ class SlideController(private val slideService: SlideService) {
     @PutMapping("/{id}")
     fun update(@RequestBody markdown: String, @PathVariable id: Long): ResponseEntity<Long> {
         val updated = slideService.update(id, markdown)
-        return ResponseEntity.ok().location(URI.create("/slide/$updated")).build()
+        return ResponseEntity.ok().location(URI.create("/ppt/$updated")).build()
     }
 
     @GetMapping("/{id}")
