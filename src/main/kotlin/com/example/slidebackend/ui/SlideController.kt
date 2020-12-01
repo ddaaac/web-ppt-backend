@@ -14,7 +14,7 @@ class SlideController(private val slideService: SlideService) {
     fun save(@RequestBody markdown: String): ResponseEntity<Long> {
         val id = slideService.create(markdown)
         return ResponseEntity.created(URI.create("/ppt/$id"))
-                .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Location")
+                .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.LOCATION)
                 .build()
     }
 
