@@ -41,7 +41,7 @@ internal class SlideControllerTest(
     @Test
     fun `post 메서드는 마크다운으로 저장할 문자열이 주어지면 Location 헤더가 반환된다`() {
         val id = 1L
-        `when`(slideService.create(anyString())).thenReturn(id)
+        given(slideService.create(anyString())).willReturn(id)
 
         mockMvc.post("/ppt") {
             content = "this is markdown contents..."
@@ -54,7 +54,7 @@ internal class SlideControllerTest(
     @Test
     fun `put 메서드는 수정할 문자열과 ppt 번호가 주어지면 Location 헤더가 반환된다`() {
         val id = 1L
-        `when`(slideService.update(eq(id), anyString())).thenReturn(id)
+        given(slideService.update(eq(id), anyString())).willReturn(id)
 
         mockMvc.put("/ppt/${id}") {
             content = "this is markdown contents..."
@@ -68,7 +68,7 @@ internal class SlideControllerTest(
     fun `get 메서드는 ppt 번호가 주어지면 해당하는 ppt가 반환된다`() {
         val id = 1L
         val expected = Slide("this is markdown contents...", id)
-        `when`(slideService.get(anyLong())).thenReturn(expected)
+        given(slideService.get(anyLong())).willReturn(expected)
 
         mockMvc.get("/ppt/${id}")
                 .andExpect {

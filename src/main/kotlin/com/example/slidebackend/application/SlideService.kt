@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class SlideService(private val slideRepository: SlideRepository) {
     fun create(markdown: String): Long {
-        val saved = slideRepository.save(Slide(markdown))
-        return saved.id
+        return slideRepository.save(Slide(markdown))
+                .id
     }
 
     fun get(id: Long): Slide {
